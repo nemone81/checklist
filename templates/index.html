@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  {% if app.user %}
+    <p>Hello {{ app.user.username }}!</p>
+    <a href="{{ logout_path }}">Logout</a>
+  {% else %}
+    <ul>
+      <li><a href="{{ login_paths.twitter }}">Login with Twitter</a></li>
+    </ul>
+  {% endif %}
+
+{% endblock %}
