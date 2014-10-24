@@ -10,6 +10,9 @@ use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 
 $app = new Application();
+
+
+
 $app->register(new UrlGeneratorServiceProvider());
 // Provides CSRF token generation
 $app->register(new FormServiceProvider());
@@ -24,12 +27,17 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
 // Provides session storage
 $app->register(new SessionServiceProvider());
 
+// twitter credentials (put on config file?)
+$app['twitter_key']    = 'gzjfLa8lFJAE6DciEwHVrJVJY';
+$app['twitter_secret'] = 'sRc5Zr1duSC6HOgOvx8QCbOA4d7GgEjnO6P7ikmmy7MNnAWcy9';
+
+//twitter provider
 $app->register(new Gigablah\Silex\OAuth\OAuthServiceProvider(), array(
     'oauth.services' => array(
         'twitter' => array(
-            'key' => 'gzjfLa8lFJAE6DciEwHVrJVJY',
-            'secret' => 'sRc5Zr1duSC6HOgOvx8QCbOA4d7GgEjnO6P7ikmmy7MNnAWcy9',
-            'scope' => array(),
+            'key'    => $app['twitter_key'],   
+            'secret' => $app['twitter_secret'],
+            'scope'  => array(),
             'user_endpoint' => 'https://api.twitter.com/1.1/account/verify_credentials.json'
         )
     )
@@ -45,11 +53,11 @@ $app->register(new SecurityServiceProvider(), array(
                 //'callback_path' => '/auth/{service}/callback',
                 //'check_path' => '/auth/{service}/check',
                 'failure_path' => '/login',
-                'with_csrf' => true
+                'with_csrf'    => true
             ),
             'logout' => array(
                 'logout_path' => '/logout',
-                'with_csrf' => true
+                'with_csrf'   => true
             ),
             'users' => new Gigablah\Silex\OAuth\Security\User\Provider\OAuthInMemoryUserProvider()
         )
