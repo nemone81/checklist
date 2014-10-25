@@ -6,10 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-//use Cklst\PostController;
-
 //Request::setTrustedProxies(array('127.0.0.1'));
-
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
@@ -27,15 +24,6 @@ $app->error(function (\Exception $e, $code) use ($app) {
     return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
 });
 
-$app->before(function (Request $request) use ($app) {
-    $token = $app['security']->getToken();
-    $app['user'] = null;
-
-    if ($token && !$app['security.trust_resolver']->isAnonymous($token)) {
-        $app['user'] = $token->getUser();
-    }
-});
-
 $app->get('/', function () use ($app) {
     $services = array_keys($app['oauth.services']);
 
@@ -50,8 +38,7 @@ $app->get('/', function () use ($app) {
             '_csrf_token' => $app['form.csrf_provider']->generateCsrfToken('logout')
         ))
     ));
-})
-->bind('homepage');
+})->bind('homepage');
 
 $app->match('/logout', function () {})->bind('logout');
 
