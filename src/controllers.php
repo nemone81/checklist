@@ -25,20 +25,14 @@ $app->error(function (\Exception $e, $code) use ($app) {
 });
 
 $app->get('/', function () use ($app) {
-    $services = array_keys($app['oauth.services']);
+	return $app['twig']->render('index.html', array());
+})
+->bind('home');
 
-    return $app['twig']->render('index.html', array(
-        'login_paths' => array_map(function ($service) use ($app) {
-            return $app['url_generator']->generate('_auth_service', array(
-                'service' => $service,
-                '_csrf_token' => $app['form.csrf_provider']->generateCsrfToken('oauth')
-            ));
-        }, array_combine($services, $services)),
-        'logout_path' => $app['url_generator']->generate('logout', array(
-            '_csrf_token' => $app['form.csrf_provider']->generateCsrfToken('logout')
-        ))
-    ));
-})->bind('homepage');
+$app->get('/login', function () use ($app) {
+	return $app['twig']->render('login.html', array());
+})
+->bind('login');
 
 $app->match('/logout', function () {})->bind('logout');
 

@@ -4,6 +4,7 @@ namespace Cklst\Security\User\Provider;
 
 use Gigablah\Silex\OAuth\Security\User\Provider\OAuthInMemoryUserProvider;
 use Doctrine\DBAL\Connection;
+use Gigablah\Silex\OAuth\Security\User\StubUser;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class OAuthDbUserProvider extends OAuthInMemoryUserProvider 
@@ -12,7 +13,7 @@ class OAuthDbUserProvider extends OAuthInMemoryUserProvider
     protected $conn;
 		
     /** @var string */
-    protected $userTableName = 'user';	
+    protected $userTableName = 'users';	
 	
     /**
      * Constructor.
@@ -46,7 +47,7 @@ class OAuthDbUserProvider extends OAuthInMemoryUserProvider
      *
      * @param StubUser $user
      */
-    private function insert($user)
+    private function insert(StubUser $user)
     {
 		// return if user is on db yet
 		if($this->checkUser($user->getEmail())) {
@@ -66,10 +67,15 @@ class OAuthDbUserProvider extends OAuthInMemoryUserProvider
 
     }
 	
+    /**
+     * Check if User in on Db
+     *
+     * @param (string) $username
+     */
 	private function checkUser($username)
 	{
 
-		$rowCount = $this->conn->executeQuery("SELECT id FROM user WHERE username = :username", 
+		$rowCount = $this->conn->executeQuery('SELECT id FROM '.$this->conn->quoteIdentifier($this->userTableName).' WHERE username = :username', 
 											  array('username' => $username)
 											  )->rowCount();
 											  
