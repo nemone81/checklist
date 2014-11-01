@@ -4,6 +4,7 @@ use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\FormServiceProvider;
+use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\SwiftmailerServiceProvider;
@@ -27,6 +28,8 @@ $app->register(new SessionServiceProvider());
 $app->register(new SecurityServiceProvider());
 $app->register(new RememberMeServiceProvider());
 $app->register(new Gigablah\Silex\OAuth\OAuthServiceProvider());
-
+$app->register(new TranslationServiceProvider(), array(
+    'translator.domains' => array(),
+));
 
 return $app;

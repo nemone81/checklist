@@ -28,3 +28,9 @@ $app['db.options'] = array(
 // twitter credentials
 $app['twitter_key'] = 'gzjfLa8lFJAE6DciEwHVrJVJY';
 $app['twitter_secret'] = 'sRc5Zr1duSC6HOgOvx8QCbOA4d7GgEjnO6P7ikmmy7MNnAWcy9';
+
+$app['form.types'] = $app->share($app->extend('form.types', function ($types) use ($app) {
+    $types[] = new \Cklst\Form\ListType();
+	$types[] = new \Cklst\Form\TodoType();
+    return $types;
+}));

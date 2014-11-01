@@ -57,11 +57,11 @@ class OAuthDbUserProvider extends OAuthInMemoryUserProvider
         $sql = 'INSERT INTO ' . $this->conn->quoteIdentifier($this->userTableName) 
 			  .' (username, name, roles) VALUES (:username, :name, :roles) ';
 
-        $params = array(
+        $params = [
             'username' => $user->getEmail(),
             'name'     => $user->getUsername(),
             'roles'    => implode(',', $user->getRoles()),
-        );
+		];
 
         $this->conn->executeUpdate($sql, $params);
 
@@ -76,13 +76,27 @@ class OAuthDbUserProvider extends OAuthInMemoryUserProvider
 	{
 
 		$rowCount = $this->conn->executeQuery('SELECT id FROM '.$this->conn->quoteIdentifier($this->userTableName).' WHERE username = :username', 
-											  array('username' => $username)
+											  ['username' => $username]
 											  )->rowCount();
 											  
 		return $rowCount;
 			
 	}
-	
+
+    /**
+     * Check if User in on Db
+     *
+     * @param (string) $username
+     */
+	public function getId($username)
+	{
+
+		$id = $this->conn->fetchColumn('SELECT id FROM '.$this->conn->quoteIdentifier($this->userTableName).' WHERE username = :username', 
+		['username' => $username]
+	);					  
+	return $id;
+			
+	}	
 	
 }
 

@@ -9,6 +9,10 @@ $app['oauth.services'] = array(
 		'user_endpoint' => 'https://api.twitter.com/1.1/account/verify_credentials.json'
 	)
 );
+$app['oauth.user_provider_listener'] = $app->share(function ($app) {
+    return new \Cklst\EventListener\UserProviderListener($app);
+});
+
 $app['security.access_rules'] = array(
 	array('^/auth', 'ROLE_USER')
 );
@@ -29,7 +33,7 @@ $app['security.firewalls'] = array(
 			/* Other options */
 		),
         'form' => array(
-            'login_path' => '/',
+            'login_path' => '/login',
             'check_path' => 'login_check',
         ),
 		'logout' => array(
@@ -38,11 +42,9 @@ $app['security.firewalls'] = array(
 		),
 		'users' => new Cklst\Security\User\Provider\OAuthDbUserProvider($app['db'])
 	),
-	'list'=> array(
-        'pattern' => '^/list$',
-		'anonymous' => false,
-    ),
 );
+
+
 
 $app->before(function (Symfony\Component\HttpFoundation\Request $request, Silex\Application $app) {
 	
@@ -62,6 +64,7 @@ $app->before(function (Symfony\Component\HttpFoundation\Request $request, Silex\
 	
 	
     $token = $app['security']->getToken();
+
     $app['user'] = null;
     if ($token && $app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
         $app['user'] = $token->getUser();
@@ -70,4 +73,15 @@ $app->before(function (Symfony\Component\HttpFoundation\Request $request, Silex\
 });
 
 
+$app['mustBeLogged'] = $app->protect(function() use ($app){
+    if (!$app['session']->has('user_id')) {
+        return $app->redirect('/login');
+    }
+});
+
+/*$mustBeLogged = function () use ($app) {
+    if (!$app['session']->has('user_id')) {
+        return $app->redirect('/login');
+    }
+};*/
 

@@ -4,10 +4,10 @@ namespace Cklst\Domain;
 
 use Doctrine\DBAL\Connection;
 
-class ListMapper
+class TodoMapper
 {
     private $database;
-	private $listTable = 'checklists';
+	private $table = 'todos';
 
     public function __construct(Connection $database)
     {
@@ -21,22 +21,22 @@ class ListMapper
      */
     public function countAll()
     {
-        return (int) $this->database->fetchColumn('SELECT COUNT(*) FROM '.$this->listTable);
+        return (int) $this->database->fetchColumn('SELECT COUNT(*) FROM '.$this->table);
     }
 
     public function findAll()
     {
-        return $this->database->fetchAll('SELECT * FROM '.$this->listTable);
+        return $this->database->fetchAll('SELECT * FROM '.$this->table);
     }
 
-    public function findAllByUser($user_id)
+    public function findAllByList($list_id)
     {
-        return $this->database->fetchAll('SELECT * FROM '.$this->listTable.' WHERE user_id =?', [$user_id] );
+        return $this->database->fetchAll('SELECT * FROM '.$this->table.' WHERE list_id =?', [$list_id] );
     }
 
     public function find($id)
     {
-        return $this->database->fetchAssoc('SELECT * FROM '.$this->listTable.' WHERE id = ?', [ $id ]);
+        return $this->database->fetchAssoc('SELECT * FROM '.$this->table.' WHERE id = ?', [ $id ]);
     }
 
     /**
@@ -47,13 +47,13 @@ class ListMapper
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function create($title, $user_id)
+    public function create($title, $list_id)
     {
         if (empty($title)) {
             throw new \InvalidArgumentException('Missing title to create a new todo.');
         }
 
-        if (!$this->database->insert($this->listTable, [ 'title' => $title, 'user_id' => $user_id ])) {
+        if (!$this->database->insert($this->table, [ 'title' => $title, 'list_id' => $list_id ])) {
             throw new \RuntimeException('Unable to create new todo.');
         }
 
@@ -63,6 +63,6 @@ class ListMapper
 
     public function delete($id)
     {
-        return $this->database->delete($this->listTable, [ 'id' => $id ]);
+        return $this->database->delete($this->table, [ 'id' => $id ]);
     }
 } 
