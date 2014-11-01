@@ -32,15 +32,23 @@ class TodoController implements ControllerProviderInterface
 		        $data = $form->getData();
 				
 				$todoId = $todoMapper->create($data['title'], $data['list_id']);
-				
 				$todo = $todoMapper->find($todoId);
-				
+				return new JsonResponse($todo);
 		        // redirect somewhere
 		        return $app->redirect($app['url_generator']->generate('list_edit', ['listId' => $data['list_id']]));
 		    }			
 						
         })->bind('todo_create');
-		
+
+
+        $controllers->match('/{todoId}', function (Request $request, Application $app, $todoId) use ($todoMapper) {
+			
+              
+	        return $todoMapper->update($todoId);
+			
+	        //return new JsonResponse($todo);
+						
+        })->bind('todo_update')->method('POST|PUT|PATCH');		
 
         return $controllers;
 		

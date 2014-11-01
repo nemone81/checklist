@@ -65,4 +65,12 @@ class TodoMapper
     {
         return $this->database->delete($this->table, [ 'id' => $id ]);
     }
+	
+    public function update($id)
+    {
+		$count = $this->database->executeUpdate('UPDATE '.$this->table.' SET is_done = !is_done WHERE id = ?', [ $id ] );
+		return $count; // 1
+        //return $this->database->update($this->table, ['is_done' => 1], [ 'id' => $id ]);
+    }	
+	
 } 
