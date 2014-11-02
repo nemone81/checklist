@@ -16,7 +16,7 @@
 		{% for todo in todos %}
 			<li>
 				
-				<a class="update-todo" href="{{ path('todo_update', {'todoId': todo.id} ) }}">{{ todo.title }}</a><span class="todo-status {{ todo.is_done ? 'done' : 'todo'  }}" data-status="{{ todo.is_done }}">{{ todo.is_done ? 'Done' : 'To Do' }}</span>
+				<a class="update-todo" href="{{ path('todo_update', {'todoId': todo.id} ) }}">{{ todo.title }}</a><span class="todo-status {{ todo.is_done ? 'done' : 'todo'  }}" data-status="{{ todo.is_done }}">{{ todo.is_done ? 'Done' : 'To Do' }}</span><a class="delete-todo" href="{{ path('todo_delete', {'todoId': todo.id} ) }}">[X]</a>
 			</li>
 	 	{% endfor %}
 	</ul>
