@@ -35,5 +35,7 @@ $app->get('/login', function () use ($app) {
 ->bind('login');
 
 $app->match('/logout', function () {})->bind('logout');
-$app->mount('/list', new Cklst\ListController());
-$app->mount('/todo', new Cklst\TodoController());
+
+// mount controllers
+$app->mount('/list', new Cklst\Controller\ListController());
+$app->mount('/todo', new Cklst\Controller\TodoController());

@@ -32,4 +32,6 @@ $app->register(new TranslationServiceProvider(), array(
     'translator.domains' => array(),
 ));
 
+$app->register(new Cklst\CklstServiceProvider());
+
 return $app;
