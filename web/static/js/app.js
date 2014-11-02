@@ -8,7 +8,7 @@ $( document ).ready(function() {
         ajax.done(function() {
 			var val = parseInt(status_info.data('status'));
 			console.log((val == 0) ? 'Done' : 'To Do');
-            status_info.html('<span class="todo-status">'+((val == 0) ? 'Done' : 'To Do')+'</span>');
+            status_info.html('<span class="todo-status">['+((val == 0) ? 'Done' : 'To Do')+']</span>');
 			status_info.data('status', (1 - val));
         });
 
@@ -23,7 +23,7 @@ $( document ).ready(function() {
         	data     : $(this).serialize(),
         	success  : function(data) {
 				//console.log(data);					
-				var $li = '<li><a class="update-todo" href="/todo/'+data.id+'/update">'+data.title+'</a><span class="todo-status todo" data-status="0">To Do</span><a class="delete-todo" href="/todo/'+data.id+'/delete">[X]</a></li>';
+				var $li = '<li><a class="update-todo" href="/todo/'+data.id+'/update">'+data.title+'</a><span class="todo-status todo" data-status="0">[To Do]</span><a class="delete-todo" href="/todo/'+data.id+'/delete">[X]</a></li>';
             	$('.todo-list').append($li);
 				$('#todo-form')[0].reset();
         	}

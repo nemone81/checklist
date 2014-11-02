@@ -64,9 +64,17 @@ class ListController implements ControllerProviderInterface
 
 		$list  = $this->app['cklist.mapper.list']->find($listId);
 		$todos = $this->app['cklist.mapper.todo']->findAllByList($listId);
-		$form  = $this->app['form.factory']->create('todo', ['list_id' => $listId]); 
-					
-		return $this->app['twig']->render('list/edit.html', [ 'list'=>$list, 'form' => $form->createView(), 'todos' => $todos ] );
+		$form  = $this->app['form.factory']->create('todo', ['list_id' => $listId]);
+		$fromCurrentUser = false; 
+		if($list['user_id'] == $this->app['session']->get('user_id')) {
+			$fromCurrentUser = true; 
+		}
+		
+		return $this->app['twig']->render('list/edit.html', [ 'list'=>$list, 
+															  'todos' => $todos,
+															  'form' => $form->createView(),
+															  'fromCurrentUser' => $fromCurrentUser
+															] );
 	}
 	
 }
