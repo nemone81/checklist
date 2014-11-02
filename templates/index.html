@@ -4,5 +4,12 @@
 {% block content %}
 
 	<h1>Home</h1>
+	
+	<h2>Lists</h2>
+	<ul>
+		{% for list in lists %}
+			<li> <a href="{{ path( 'list_edit', {'listId': list.id} ) }}">{{ list.title }} <b>{{ list.name }}</b></a></li>
+	 	{% endfor %}
+	</ul>
 
 {% endblock %}

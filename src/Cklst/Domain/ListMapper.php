@@ -34,6 +34,11 @@ class ListMapper
         return $this->database->fetchAll('SELECT * FROM '.$this->listTable.' WHERE user_id =?', [$user_id] );
     }
 
+    public function findAllWithUserInfo()
+    {
+        return $this->database->fetchAll('SELECT  '.$this->listTable.'.id, title, user_id, username, name  FROM '.$this->listTable.' JOIN users on '.$this->listTable.'.user_id = users.id' );
+    }
+
     public function find($id)
     {
         return $this->database->fetchAssoc('SELECT * FROM '.$this->listTable.' WHERE id = ?', [ $id ]);

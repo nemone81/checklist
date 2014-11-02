@@ -25,12 +25,14 @@ $app->error(function (\Exception $e, $code) use ($app) {
 });
 
 $app->get('/', function () use ($app) {
-	return $app['twig']->render('index.html', array());
+	
+	$lists = $app['cklist.mapper.list']->findAllWithUserInfo();
+	return $app['twig']->render('index.html', [ 'lists' => $lists ] );
 })
 ->bind('home');
 
 $app->get('/login', function () use ($app) {
-	return $app['twig']->render('login.html', array());
+	return $app['twig']->render('login.html', [] );
 })
 ->bind('login');
 
