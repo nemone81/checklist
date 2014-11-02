@@ -13,6 +13,8 @@ use Silex\Provider\RememberMeServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 
+use Gigablah\Silex\OAuth\OAuthServiceProvider;
+use Cklst\CklstServiceProvider;
 
 $app = new Application();
 
@@ -27,11 +29,11 @@ $app->register(new TwigServiceProvider());
 $app->register(new SessionServiceProvider());
 $app->register(new SecurityServiceProvider());
 $app->register(new RememberMeServiceProvider());
-$app->register(new Gigablah\Silex\OAuth\OAuthServiceProvider());
+$app->register(new OAuthServiceProvider());
 $app->register(new TranslationServiceProvider(), array(
     'translator.domains' => array(),
 ));
 
-$app->register(new Cklst\CklstServiceProvider());
+$app->register(new CklstServiceProvider());
 
 return $app;

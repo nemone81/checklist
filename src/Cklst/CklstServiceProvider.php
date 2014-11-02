@@ -23,9 +23,7 @@ class CklstServiceProvider implements ServiceProviderInterface
 		
     }
 	
-    public function boot(Application $app)
-    {
-    }
+    public function boot(Application $app) {}
 }
 
 
