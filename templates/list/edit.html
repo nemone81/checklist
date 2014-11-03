@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	
+    <h2>Edit List</h2>
+	<hr/>
+	<h3>{{ list.title }}</h3>
+	
+	{% if fromCurrentUser %}	
+	<form action="{{ path('todo_create') }}" method="post" id="todo-form">
+    	{{ form_widget(form) }}
+	</form>	
+	{% endif %}
+	
+	<hr/>
+	
+	<ul class="todo-list">
+		{% for todo in todos %}
+			<li>
+				{% if fromCurrentUser %}
+					<a class="update-todo" href="{{ path('todo_update', {'todoId': todo.id} ) }}">{{ todo.title }}</a><span class="todo-status {{ todo.is_done ? 'done' : 'todo'  }}" data-status="{{ todo.is_done }}">[{{ todo.is_done ? 'Done' : 'To Do' }}]</span><a class="delete-todo" href="{{ path('todo_delete', {'todoId': todo.id} ) }}">[X]</a>
+				{% else %}
+					<span>{{ todo.title }}</span><span class="todo-status {{ todo.is_done ? 'done' : 'todo'  }}" data-status="{{ todo.is_done }}">[{{ todo.is_done ? 'Done' : 'To Do' }}]</span>		
+				{% endif %}
+			</li>
+	 	{% endfor %}
+	</ul>
+{% endblock %}
+
+{% block javascript %}
+	<script type="text/javascript" src="{{ app.request.basepath }}/static/js/app.js"></script>
+{% endblock %}
+
+

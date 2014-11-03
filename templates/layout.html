@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{% block title '' %} - My Silex Application</title>
+        <title>{% block title 'Cklist' %} - </title>
 
-        <link href="{{ app.request.basepath }}/css/main.css" rel="stylesheet" type="text/css" />
+        <link href="{{ app.request.basepath }}/static/css/style.css" rel="stylesheet" type="text/css" />
 
         <script type="text/javascript">
             var _gaq = _gaq || [];
@@ -18,6 +18,22 @@
         </script>
     </head>
     <body>
+		
+		<nav>
+		    {% if app.user %}
+		      <p>Hello {{ app.user.username }}!</p>
+		      <a href="{{ logout_path }}">Logout</a>
+			  <a href="{{ path( 'list_home') }}">Your Lists</a>
+		    {% else %}
+		      <ul>
+		        <li><a href="{{ login_paths.twitter }}">Login with Twitter</a></li>
+		      </ul>
+		    {% endif %}
+		</nav>
+		
         {% block content %}{% endblock %}
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		{% block javascript %}{% endblock %}
     </body>
 </html>

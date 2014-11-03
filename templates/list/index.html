@@ -1,5 +1,22 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    List Controller
+	
+
+    <h2>Create List</h2>
+	
+	<form action="{{ path('list_create') }}" method="post">
+    	{{ form_widget(form) }}
+	</form>	
+		
+	
+	<hr/>
+	
+	<h2>Yours Lists</h2>
+	<ul>
+		{% for list in lists %}
+			<li> <a href="{{ path( 'list_edit', {'listId': list.id} ) }}">{{ list.title }}</a></li>
+	 	{% endfor %}
+	</ul>
+	
 {% endblock %}

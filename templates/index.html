@@ -1,14 +1,15 @@
 {% extends "layout.html" %}
 
+
 {% block content %}
 
-  {% if app.user %}
-    <p>Hello {{ app.user.username }}!</p>
-    <a href="{{ logout_path }}">Logout</a>
-  {% else %}
-    <ul>
-      <li><a href="{{ login_paths.twitter }}">Login with Twitter</a></li>
-    </ul>
-  {% endif %}
+	<h1>Home</h1>
+	
+	<h2>Lists</h2>
+	<ul>
+		{% for list in lists %}
+			<li> <a href="{{ path( 'list_edit', {'listId': list.id} ) }}">{{ list.title }} <b>{{ list.name }}</b></a></li>
+	 	{% endfor %}
+	</ul>
 
 {% endblock %}
