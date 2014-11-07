@@ -1,0 +1,9 @@
+<?php
+
+define('DB_HOST', '***');
+define('DB_NAME', '***');
+define('DB_USER', '***');
+define('DB_PWD',  '***');
+
+define('TWITTER_KEY',    '***');
+define('TWITTER_SECRET', '***');

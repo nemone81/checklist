@@ -1,6 +1,7 @@
 <?php
 
 // configure your app for the production environment
+require_once 'constants.php';
 
 $app['twig.path'] = array(__DIR__.'/../templates');
 $app['twig.options'] = array('cache' => __DIR__.'/../var/cache/twig');
@@ -19,15 +20,15 @@ $app['swiftmailer.options'] = array();
 // Database config. See http://silex.sensiolabs.org/doc/providers/doctrine.html
 $app['db.options'] = array(
     'driver'   => 'pdo_mysql',
-    'host'     => '127.0.0.1',
-    'dbname'   => 'cklist',
-    'user'     => 'root',
-    'password' => '',
+    'host'     => DB_HOST,
+    'dbname'   => DB_NAME,
+    'user'     => DB_USER,
+    'password' => DB_PWD,
 );
 
 // twitter credentials
-$app['twitter_key'] = 'gzjfLa8lFJAE6DciEwHVrJVJY';
-$app['twitter_secret'] = 'sRc5Zr1duSC6HOgOvx8QCbOA4d7GgEjnO6P7ikmmy7MNnAWcy9';
+$app['twitter_key'] = TWITTER_KEY;
+$app['twitter_secret'] = TWITTER_SECRET;
 
 $app['form.types'] = $app->share($app->extend('form.types', function ($types) use ($app) {
     $types[] = new \Cklst\Form\ListType();
