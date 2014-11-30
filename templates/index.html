@@ -3,13 +3,39 @@
 
 {% block content %}
 
-	<h1>Home</h1>
-	
-	<h2>Lists</h2>
-	<ul>
+	<h3 class="title">TODAY October 29th</h3>
+
+
+	<ul class="list">
 		{% for list in lists %}
-			<li> <a href="{{ path( 'list_edit', {'listId': list.id} ) }}">{{ list.title }} <b>{{ list.name }}</b></a></li>
-	 	{% endfor %}
+
+
+			<li class="item">
+				<div class="wrap-middle"> 	  
+					<div class="middle">
+						<h4>
+							<a href="{{ path( 'list_edit', {'listId': list.id} ) }}">{{ list.title }}</a>
+							<a href="#author" class="author">{{ list.name }}</a>
+						</h4>
+					</div>
+				</div>
+				<div class="left">
+					<span class="votes">2.8 k</span>
+					<span class="label-votes">votes</span>
+				</div>	    
+				<div class="right">
+					<span class="glyphicon glyphicon-comment"></span>
+					<span class="comment">56</span>
+				</div>      
+			</li>
+
+
+		{% endfor %}
 	</ul>
+
+
+
+
+
 
 {% endblock %}
