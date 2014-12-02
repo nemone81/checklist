@@ -1,39 +1,72 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>{% block title 'Cklist' %} - </title>
+	<head>
+		<title>{% block title 'Cklist' %} - </title>
 
-        <link href="{{ app.request.basepath }}/static/css/style.css" rel="stylesheet" type="text/css" />
+		<link href="{{ app.request.basepath }}/static/css/grid.css" rel="stylesheet" type="text/css" />
+		<link href="{{ app.request.basepath }}/static/css/style.css" rel="stylesheet" type="text/css" />
 
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
-
-            (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
-    </head>
-    <body>
 		
-		<nav>
-		    {% if app.user %}
-		      <p>Hello {{ app.user.username }}!</p>
-		      <a href="{{ logout_path }}">Logout</a>
-			  <a href="{{ path( 'list_home') }}">Your Lists</a>
-		    {% else %}
-		      <ul>
-		        <li><a href="{{ login_paths.twitter }}">Login with Twitter</a></li>
-		      </ul>
-		    {% endif %}
-		</nav>
+	</head>
+	<body>
+
+		<div id="all-page">
+			<div class="container-fluid">
+				<header>
+					<nav class="head-links">
+						{% if app.user %}
+						  <span class="pull-left">Hello {{ app.user.username }}!</span>
+						  <a href="{{ logout_path }}">Logout</a>
+						  <a href="{{ path( 'list_home') }}">Your Lists</a>
+						{% else %}
+						  <ul>
+							<li><a href="{{ login_paths.twitter }}">Login with Twitter</a></li>
+						  </ul>
+						{% endif %}
+					</nav>
+					<h1 class="logo"><a href="{{ app.request.basepath }}"><img class="img-responsive" src="{{ app.request.basepath }}/static/img/logo.png" alt=""></a></h1>
+				</header>
+
+				<section id="search">
+					<form class="navbar-form" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search a Checklist or add a new one">
+						</div>
+						<button type="submit" class="btn btn-search"><span class="glyphicon glyphicon-search"></span></button>
+						<button type="submit" class="btn btn-new"><span class="glyphicon glyphicon-plus"></span></button>
+					</form>
+				</section>
+
+				<section id="lists">
+					{% block content %}{% endblock %}	
+				</section>
+
+				<footer id="footer">
+					<p class="copy">
+						CCKLST. Made during the night.
+					</p>
+				</footer>
+
+			</div>
+		</div>
 		
-        {% block content %}{% endblock %}
+		
+		
+		
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		{% block javascript %}{% endblock %}
-    </body>
+
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+	</body>
 </html>

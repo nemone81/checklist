@@ -1,0 +1,193 @@
+/*
+*  ######   ######  ##    ## ##        ######  ######## 
+* ##    ## ##    ## ##   ##  ##       ##    ##    ##    
+* ##       ##       ##  ##   ##       ##          ##    
+* ##       ##       #####    ##        ######     ##    
+* ##       ##       ##  ##   ##             ##    ##    
+* ##    ## ##    ## ##   ##  ##       ##    ##    ##    
+*  ######   ######  ##    ## ########  ######     ##    
+*
+* Authors:
+* # Davide Calignano
+* # Fabio Crestioni
+* # Alessandro Fiore
+*
+*/
+
+
+/* Common */
+
+#all-page{
+	max-width: 840px;
+	margin: 0 auto;
+}
+
+.logo{
+	padding: 20px;
+	text-align: center;
+	clear:both;
+}
+
+.logo a{
+	display: inline-block;
+}
+
+.head-links{
+	margin-bottom: 30px;
+	margin-top: 30px;
+	width: 100%;
+	text-align: right;
+}
+
+.head-links li{
+	padding: 10px 0;
+	padding-left: 10px;
+	list-style: none;
+}
+
+
+/* Footer */
+.copy{
+	text-align: center;
+	padding: 20px;
+	color: #aaa;
+	font-size: 11px;
+}
+
+
+/* Search */
+#search{
+	text-align: center;
+	margin: 80px auto;
+}
+
+#search form{
+	display: inline-block;
+	width: 100%;
+	max-width: 650px;
+	position:relative;
+}
+
+#search .form-group{
+	padding-right: 70px;
+}
+
+#search .form-group input{
+	width: 100%;
+	height: 35px;
+	padding: 5px;
+	margin: 0;
+	border: 1px solid #888;
+}
+
+#search .btn{
+	display: inline-block;
+	height: 35px;
+	border: 0;
+	width: 35px;
+	position: absolute;
+	top: 0;
+}
+
+#search .btn-search{
+	background: #8b9aad;
+	color: #73759b;
+	right: 35px;
+}
+
+#search .btn-new{
+	background: #8d8bad;
+	color: #627690;
+	right: 0px;
+}
+
+
+/* list */
+
+.list{
+	padding-left: 0;
+	display: inline-block;
+	width: 100%;
+}
+
+#lists .title, #title-list h3{
+	border-bottom:1px solid #333;
+	margin-bottom: 10px;
+}
+
+
+.list .item{
+	border: 1px solid #b0b0b0;
+	border-bottom: 0px;
+	border-right: 2px solid #b0b0b0;
+	background-color: #d3d3d3;
+	margin: 0;
+	color: #666;
+	width: 100%;
+   	margin: 0 auto;
+   	list-style: none;
+	display: block;
+	float: left;
+}
+
+.list .item a{
+	color: #666;
+}
+
+.list .item a.author{
+	font-size: 14px;
+	color: #8D8BAD;
+}
+
+.list .item .glyphicon-comment{
+	color: #8d8bad;
+	line-height: 40px;
+	vertical-align: middle;
+	font-size: 20px;
+	padding-right: 5px;
+}
+
+.list .item .comment{
+	color: #627690;
+}
+
+.list .item .votes,
+.list .item .label-votes{
+	width: 100%;
+	display: block;
+	text-align: center;
+}
+.list .item .votes{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.list .item:last-child{
+	border-bottom: 1px solid #b0b0b0;
+}
+
+.list .item .wrap-middle{
+   float: left;
+   width: 100%;
+}
+.list .item .middle{
+   margin-right:80px;
+   margin-left:80px;
+   border-right: 1px solid #b0b0b0;
+   border-left: 1px solid #b0b0b0;
+   padding: 10px;
+   min-height: 62px;
+}
+.list .item .left{
+   float: left;
+   width: 80px;
+   margin-left: -100%;
+   padding: 10px;
+}
+.list .item .right{
+   float: left;
+   width: 80px;
+   margin-left: -80px;
+   padding: 10px;
+}
+
